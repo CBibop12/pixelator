@@ -854,12 +854,25 @@ function App() {
       {pixelData && !isProcessing && (
         <div className="space-y-8">
           {/* Пиксельная сетка */}
-          <div className="flex justify-center">
-            <PixelGrid
-              pixelData={pixelData}
-              gridSize={Math.max(10, Math.min(30, 400 / Math.max(dimensions.width, dimensions.height)))}
-              onExport={handleExport}
-            />
+          <div className="w-full overflow-x-auto pb-4">
+            <div
+              className="flex px-4"
+              style={{
+                scrollPadding: '20px',
+                justifyContent: (() => {
+                  const gridSize = Math.max(10, Math.min(30, 400 / Math.max(dimensions.width, dimensions.height)));
+                  const gridWidth = dimensions.width * gridSize + (dimensions.width - 1) * 0.5; // учитываем размер gap
+                  const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+                  return gridWidth > screenWidth - 100 ? 'flex-start' : 'center';
+                })()
+              }}
+            >
+              <PixelGrid
+                pixelData={pixelData}
+                gridSize={Math.max(10, Math.min(30, 400 / Math.max(dimensions.width, dimensions.height)))}
+                onExport={handleExport}
+              />
+            </div>
           </div>
 
           {/* Палитра цветов */}
