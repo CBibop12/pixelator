@@ -1,0 +1,35 @@
+/* Дополнительные стили для приложения пикселизации */
+.pixel-grid {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Кастомные стили для input file */
+input[type="file"]::-webkit-file-upload-button {
+  cursor: pointer;
+}
+
+/* Отзывчивость */
+@media (max-width: 768px) {
+  .pixel-grid {
+    max-width: calc(100vw - 2rem);
+    overflow-x: auto;
+  }
+}
